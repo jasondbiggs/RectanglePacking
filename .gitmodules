@@ -1,0 +1,9 @@
+[submodule "scripts/LibraryLinkCodeGenerator"]
+	path = scripts/LibraryLinkCodeGenerator
+	url = git@github.com:jasondbiggs/LibraryLinkCodeGenerator.git
+[submodule "CPPSource/LibraryLinkUtilities"]
+	path = CPPSource/LibraryLinkUtilities
+	url = git@github.com:WolframResearch/LibraryLinkUtilities.git
+[submodule "CPPSource/RectanglePackingLibrary/LibraryLinkFunctionMacros"]
+	path = CPPSource/RectanglePackingLibrary/LibraryLinkFunctionMacros
+	url = git@github.com:jasondbiggs/LibraryLinkFunctionMacros.git
