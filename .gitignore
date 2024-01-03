@@ -4,3 +4,5 @@ build/*
 
 install
 ExternalComponents/*
+
+*_developer_notebook_user.nb

@@ -59,7 +59,7 @@ With[
 If[!AssociationQ[$CorePacletFailureLUT],
 	$CorePacletFailureLUT = <|
 		"GeneralFailure" -> {31, "`1`"},
-		"UnknownEnumValue" -> {27, "`1` is not a known value for type `2`."}
+		"UnknownEnumValue" -> {27, "`1` is not a known value for type `2`, available types include `3`."}
 	|>
 ];
 
@@ -209,7 +209,7 @@ enumerate[name_, enums_?AssociationQ] := With[
 	enum[name][num_] := Lookup[
 		data, 
 		num, 
-		ThrowRectanglePackingLibraryFailure["UnknownEnumValue", "MessageParameters" -> {num, name}]
+		ThrowRectanglePackingLibraryFailure["UnknownEnumValue", "MessageParameters" -> {num, name, Keys[enums]}]
 	];
 ]
 
@@ -225,9 +225,18 @@ toDataStore[rules:{__Rule}] := Developer`DataStore @@ MapAt[dsPrimitive, rules, 
 toDataStore[obj_List] := Developer`DataStore @@ (dsPrimitive /@ obj)
 toDataStore[ass_?AssociationQ /; AllTrue[Keys[ass], StringQ]] := Developer`DataStore @@ Normal[dsPrimitive /@ ass]
 
-dsPrimitive[obj : (_String | _Integer | _Real | {__Integer} | {__Real} | True | False)] := obj
+dsPrimitive[obj : (_String | _Integer | _Real | {__Integer} | {__Real} | True | False | _Rule)] := obj
 dsPrimitive[{s__String}] := Developer`DataStore[s]
-dsPrimitive[in : _Association | {__Rule} | _Rule] := toDataStore[in]
+dsPrimitive[in : _Association | {__Rule}] := toDataStore[in]
+dsPrimitive[in_List] := Block[{pa},Which[
+	Developer`PackedArrayQ[in],
+		in,
+	Developer`PackedArrayQ[pa = Developer`ToPackedArray @ in],
+		pa,
+	True,
+		toDataStore[in]
+]]
+dsPrimitive[ds_Developer`DataStore] := ds;
 dsPrimitive[obj_] := ThrowRectanglePackingLibraryFailure["NoDataStore", "MessageParameters" -> {obj}]
 
 

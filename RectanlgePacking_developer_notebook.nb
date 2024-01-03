@@ -1,0 +1,1053 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     46504,       1045]
+NotebookOptionsPosition[     41736,        947]
+NotebookOutlinePosition[     43283,        988]
+CellTagsIndexPosition[     43240,        985]
+WindowTitle->RectanglePacking - DeveloperNotebook.nb
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData["Quit"], "Input",
+ CellChangeTimes->{{3.86872317880581*^9, 3.868723179260735*^9}, {
+  3.912946605705071*^9, 3.912946606460691*^9}},
+ CellLabel->"In[26]:=",ExpressionUUID->"bae53ea4-1f21-42f0-8fbf-b8d1575c9302"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.912947032868482*^9, 
+  3.912947034741267*^9}},ExpressionUUID->"f7323754-be0a-42e4-90dd-\
+9e8932520275"],
+
+Cell[CellGroupData[{
+
+Cell["Create the buttons at the top", "Section",
+ CellChangeTimes->{{3.869216259218031*^9, 3.869216261242503*^9}, {
+  3.8754674197997694`*^9, 
+  3.875467424223573*^9}},ExpressionUUID->"53436a17-b8c6-499d-a71e-\
+33898b59fa6d"],
+
+Cell[BoxData["Quit"], "Input",
+ CellChangeTimes->{{3.870962337086336*^9, 3.870962338484002*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"5e5d4057-3cd3-4b1f-bced-31f3f9bec8a9"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"$pacletName", "=", "\"\<RectanglePacking\>\""}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"CurrentValue", "[", 
+       RowBox[{
+        RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+        "\"\<WindowTitle\>\""}], "]"}], "=", 
+      RowBox[{"$pacletName", "<>", "\"\< - DeveloperNotebook.nb\>\""}]}], ";",
+      "\[IndentingNewLine]", 
+     RowBox[{"buttons", "=", 
+      RowBox[{"Row", "[", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Button", "[", 
+          RowBox[{
+           RowBox[{
+           "\"\<load \>\"", "<>", "$pacletName", "<>", "\"\< paclet\>\""}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{"$PublisherID", ";", "\[IndentingNewLine]", 
+            RowBox[{"$PublisherID", "=", "\"\<JasonB\>\""}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"PacletDirectoryLoad", "[", 
+             RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"With", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"syms", "=", 
+                RowBox[{"Join", "[", 
+                 RowBox[{
+                  RowBox[{"Names", "[", 
+                   RowBox[{
+                   "\"\<JasonB`\>\"", "<>", "$pacletName", "<>", 
+                    "\"\<`*\>\""}], "]"}], ",", 
+                  RowBox[{"Names", "[", 
+                   RowBox[{
+                   "\"\<JasonB`\>\"", "<>", "$pacletName", "<>", 
+                    "\"\<`*`*\>\""}], "]"}]}], "]"}]}], "}"}], ",", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"Unprotect", "[", "#", "]"}], ";", 
+                  RowBox[{"ClearAll", "[", "#", "]"}], ";"}], ")"}], "&"}], "/@",
+                "syms"}]}], "]"}], ";", "\[IndentingNewLine]", 
+            RowBox[{"Get", "@", 
+             RowBox[{"(", 
+              RowBox[{
+              "\"\<JasonB`\>\"", "<>", "$pacletName", "<>", "\"\<`\>\""}], 
+              ")"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{
+            "Needs", "@", 
+             "\"\<JasonB`RectanglePacking`RectanglePackingLibrary`\>\""}], 
+            ";"}]}], "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Button", "[", 
+          RowBox[{"\"\<open resource definition notebook\>\"", ",", 
+           RowBox[{"NotebookOpen", "@", 
+            RowBox[{"FileNameJoin", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"NotebookDirectory", "[", "]"}], ",", "$pacletName", 
+               ",", "\"\<ResourceDefinition.nb\>\""}], "}"}], "]"}]}]}], 
+          "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"With", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"refpages", "=", 
+             RowBox[{
+              RowBox[{"StringDelete", "[", 
+               RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "/@", 
+              RowBox[{"FileNames", "[", 
+               RowBox[{"\"\<*.nb\>\"", ",", 
+                RowBox[{"FileNameJoin", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+                   "$pacletName", ",", "\"\<Documentation\>\"", ",", 
+                   "\"\<English\>\""}], "}"}], "]"}], ",", "3"}], "]"}]}]}], 
+            "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"ActionMenu", "[", 
+            RowBox[{"\"\<Reference pages\>\"", ",", 
+             RowBox[{"Prepend", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"RuleDelayed", "[", 
+                  RowBox[{
+                   RowBox[{"FileBaseName", "[", "#", "]"}], ",", 
+                   RowBox[{"NotebookOpen", "[", 
+                    RowBox[{"FileNameJoin", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"NotebookDirectory", "[", "]"}], ",", "#"}], 
+                    "}"}], "]"}], "]"}]}], "]"}], "&"}], "/@", "refpages"}], 
+               ",", 
+               RowBox[{"\"\<Reference pages:\>\"", ":>", "\"\<\>\""}]}], 
+              "]"}], ",", 
+             RowBox[{"Appearance", "->", "\"\<PopupMenu\>\""}]}], "]"}]}], 
+          "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "}"}], 
+       "\[IndentingNewLine]", "]"}]}]}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"SetOptions", "[", 
+  RowBox[{
+   RowBox[{"EvaluationNotebook", "[", "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"DockedCells", "->", 
+    RowBox[{"Cell", "[", 
+     RowBox[{
+      RowBox[{"BoxData", "[", 
+       RowBox[{"ToBoxes", "[", "buttons", "]"}], "]"}], ",", 
+      "\"\<DockedCell\>\""}], "]"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.874154818867919*^9, 3.874154821005509*^9}, {
+   3.874154893979012*^9, 3.874154894230637*^9}, {3.884712612301049*^9, 
+   3.884712632337965*^9}, {3.884976116272404*^9, 3.8849761188233843`*^9}, {
+   3.885056836181514*^9, 3.88505687096605*^9}, {3.88505690470243*^9, 
+   3.885056907077142*^9}, {3.885056972347491*^9, 3.885056990270834*^9}, {
+   3.885057500639065*^9, 3.8850575108331747`*^9}, {3.885057732855321*^9, 
+   3.8850577346608763`*^9}, {3.88505776996541*^9, 3.885057842037734*^9}, {
+   3.885058758330131*^9, 3.8850587596462927`*^9}, {3.885058985257929*^9, 
+   3.885059030896453*^9}, 3.88505978211874*^9, {3.886175115441519*^9, 
+   3.886175116223502*^9}, {3.886177287087569*^9, 3.886177430059826*^9}, {
+   3.8862706953468323`*^9, 3.886270729035604*^9}, {3.886530133057773*^9, 
+   3.886530136880671*^9}, 3.886617498798439*^9, {3.89445516860196*^9, 
+   3.894455201438092*^9}, {3.912255551745968*^9, 3.912255571648596*^9}, {
+   3.9122564545874367`*^9, 3.912256465722135*^9}, {3.913226208422616*^9, 
+   3.9132262097998857`*^9}},ExpressionUUID->"b5658f99-cc01-48dc-b56a-\
+a4f9b6d3d29d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"$pacletName", "=", "\"\<RectanglePacking\>\""}], ",", " ", 
+      RowBox[{"pid", "=", "\"\<JasonB\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"buttons", "=", 
+     RowBox[{"Row", "[", 
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Button", "[", 
+         RowBox[{
+          RowBox[{
+          "\"\<load \>\"", "<>", "$pacletName", "<>", "\"\< paclet\>\""}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"$PublisherID", ";", "\[IndentingNewLine]", 
+           RowBox[{"$PublisherID", "=", "pid"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"PacletDirectoryLoad", "[", 
+            RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"With", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"syms", "=", 
+               RowBox[{"Join", "[", 
+                RowBox[{
+                 RowBox[{"Names", "[", 
+                  RowBox[{
+                  "pid", "<>", "\"\<`\>\"", "<>", "$pacletName", "<>", 
+                   "\"\<`*\>\""}], "]"}], ",", 
+                 RowBox[{"Names", "[", 
+                  RowBox[{
+                  "pid", "<>", "\"\<`\>\"", "<>", "$pacletName", "<>", 
+                   "\"\<`*`*\>\""}], "]"}]}], "]"}]}], "}"}], ",", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"Unprotect", "[", "#", "]"}], ";", 
+                 RowBox[{"ClearAll", "[", "#", "]"}], ";"}], ")"}], "&"}], "/@",
+               "syms"}]}], "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"Get", "@", 
+            RowBox[{"(", 
+             RowBox[{
+             "pid", "<>", "\"\<`\>\"", "<>", "$pacletName", "<>", 
+              "\"\<`\>\""}], ")"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"Needs", "/@", 
+            RowBox[{"Select", "[", 
+             RowBox[{"$Packages", ",", 
+              RowBox[{"StringStartsQ", "[", 
+               RowBox[{
+               "pid", "<>", "\"\<`\>\"", "<>", "$pacletName", "<>", 
+                "\"\<`\>\""}], "]"}]}], "]"}]}], ";"}]}], 
+         "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", "\t", 
+        RowBox[{"Button", "[", 
+         RowBox[{"\"\<open resource definition notebook\>\"", ",", 
+          RowBox[{"NotebookOpen", "@", 
+           RowBox[{"FileNameJoin", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"NotebookDirectory", "[", "]"}], ",", "$pacletName", 
+              ",", "\"\<ResourceDefinition.nb\>\""}], "}"}], "]"}]}]}], 
+         "\[IndentingNewLine]", "\t", "]"}]}], "}"}], "\[IndentingNewLine]", 
+      "]"}]}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"SetOptions", "[", 
+  RowBox[{
+   RowBox[{"EvaluationNotebook", "[", "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"DockedCells", "->", 
+    RowBox[{"Cell", "[", 
+     RowBox[{
+      RowBox[{"BoxData", "[", 
+       RowBox[{"ToBoxes", "[", "buttons", "]"}], "]"}], ",", 
+      "\"\<DockedCell\>\""}], "]"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.869820592639277*^9, 3.869820633326549*^9}, {
+   3.869820670980801*^9, 3.86982067894936*^9}, {3.8698209505219517`*^9, 
+   3.869821032391773*^9}, {3.8698211705641813`*^9, 3.8698211773775587`*^9}, {
+   3.8698212118422203`*^9, 3.8698212806553593`*^9}, {3.8698214011332893`*^9, 
+   3.8698214430593777`*^9}, {3.870271974872394*^9, 3.8702719865122137`*^9}, {
+   3.87096240159238*^9, 3.870962405179081*^9}, {3.8716586185987053`*^9, 
+   3.8716586392473516`*^9}, 3.872250021183967*^9, {3.874075833849876*^9, 
+   3.874075858947403*^9}, {3.8740758956948833`*^9, 3.874075929069293*^9}, {
+   3.874075992601411*^9, 3.874076008978565*^9}, {3.874076085954412*^9, 
+   3.874076089632761*^9}, 3.8741407765620728`*^9, {3.8752639524633512`*^9, 
+   3.875263958664546*^9}, {3.875264281218152*^9, 3.875264305576564*^9}, {
+   3.875269485422331*^9, 3.875269501947633*^9}, {3.875269569681487*^9, 
+   3.8752695966364822`*^9}, {3.875269661484211*^9, 3.875269661779784*^9}, {
+   3.8759607695109386`*^9, 3.875960772485952*^9}, {3.8759617273142567`*^9, 
+   3.875961732849475*^9}, {3.875961816690742*^9, 3.875961831456046*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"51559767-05e2-41a4-8f28-e9732f7c9e77"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Headline image", "Section",
+ CellChangeTimes->{{3.8692162670341597`*^9, 
+  3.869216270041349*^9}},ExpressionUUID->"893a2275-08c7-4e7a-91d2-\
+d16b5e2ef2e5"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"WordCloud", "[", 
+  RowBox[{
+   RowBox[{"Append", "[", 
+    RowBox[{
+     RowBox[{"Thread", "[", 
+      RowBox[{"1", "->", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"SymbolName", "@*", "Symbol"}], "/@", 
+         "JasonB`WeakCache`Private`$exportedSymbols"}], ")"}]}], "]"}], ",", 
+     RowBox[{".25", "->", "\"\<i have no idea for a paclet logo\>\""}]}], 
+    "]"}], ",", 
+   RowBox[{"WordOrientation", "->", "\"\<HorizontalVertical\>\""}], ",", 
+   RowBox[{"AspectRatio", "->", ".65"}], ",", 
+   RowBox[{"RandomSeeding", "->", "56763765"}], ",", 
+   RowBox[{"PlotTheme", "->", "\"\<Marketing\>\""}]}], "]"}]], "Input",
+ CellChangeTimes->{3.875875138127523*^9},
+ CellLabel->"In[39]:=",ExpressionUUID->"44a25a8c-fc20-4757-aa2f-35c8d4eb5bf5"],
+
+Cell[BoxData[
+ GraphicsBox[{InsetBox[
+    StyleBox["\<\"StrongReference\"\>",
+     StripOnInput->False,
+     FontSize->Scaled[0.09259259259259259],
+     FontColor->RGBColor[1., 0.325204, 0.406504]], {0, 0}, Center, Automatic],
+    InsetBox[
+    StyleBox["\<\"CleanupAfter\"\>",
+     StripOnInput->False,
+     FontSize->Scaled[0.09259259259259259],
+     FontColor->RGBColor[0.655728, 0.8, 0.]], {-0.5, -54.5}, Center, 
+    Automatic], InsetBox[
+    StyleBox[
+     RotationBox["\<\"SameInstanceQ\"\>",
+      BoxRotation->1.5707963267948966`],
+     StripOnInput->False,
+     FontSize->Scaled[0.09259259259259259],
+     FontColor->RGBColor[0.295048, 0.8, 0.286932]], {-261.5, -8.5}, Center, 
+    Automatic], InsetBox[
+    StyleBox["\<\"ClearHistory\"\>",
+     StripOnInput->False,
+     FontSize->Scaled[0.09259259259259259],
+     FontColor->RGBColor[0., 0.742291, 0.873126]], {7.5, 55.5}, Center, 
+    Automatic], InsetBox[
+    StyleBox["\<\"CheckWeakCache\"\>",
+     StripOnInput->False,
+     FontSize->Scaled[0.09259259259259259],
+     FontColor->RGBColor[1., 0.4, 0.]], {16.5, 108.5}, Center, Automatic], 
+   InsetBox[
+    StyleBox["\<\"CreateReference\"\>",
+     StripOnInput->False,
+     FontSize->Scaled[0.09259259259259259],
+     FontColor->RGBColor[0.893126, 0.4, 0.767184]], {1.5, -109.5}, Center, 
+    Automatic], InsetBox[
+    StyleBox[
+     RotationBox["\<\"ClearWeakCache\"\>",
+      BoxRotation->1.5707963267948966`],
+     StripOnInput->False,
+     FontSize->Scaled[0.09259259259259259],
+     FontColor->RGBColor[1., 0.656408, 0.]], {300.5, 0.5}, Center, Automatic],
+    InsetBox[
+    StyleBox["\<\"WeakHashTable\"\>",
+     StripOnInput->False,
+     FontSize->Scaled[0.09259259259259259],
+     FontColor->RGBColor[0., 0.786874, 0.739379]], {2.5, 162.5}, Center, 
+    Automatic], InsetBox[
+    StyleBox[
+     RotationBox["\<\"WeakReference\"\>",
+      BoxRotation->1.5707963267948966`],
+     StripOnInput->False,
+     FontSize->Scaled[0.09259259259259259],
+     FontColor->RGBColor[1., 0.520437, 0.]], {-320.5, 0.5}, Center, 
+    Automatic], InsetBox[
+    StyleBox["\<\"SetWeakCache\"\>",
+     StripOnInput->False,
+     FontSize->Scaled[0.09259259259259259],
+     FontColor->RGBColor[0.238758, 0.610466, 1.]], {11.5, -163.5}, Center, 
+    Automatic], InsetBox[
+    StyleBox[
+     RotationBox["\<\"i have no idea for a paclet logo\"\>",
+      BoxRotation->1.5707963267948966`],
+     StripOnInput->False,
+     FontSize->Scaled[0.023148148148148147`],
+     FontColor->RGBColor[0.7529330319872088, 0.4176501130047967, 1.]], {251.5, -33.5},
+     Center, Automatic]},
+  AspectRatio->0.65,
+  DefaultBaseStyle->{"Graphics", FontFamily -> "Source Sans Pro"},
+  Method->{
+   "DefaultBoundaryStyle" -> Automatic, 
+    "DefaultGraphicsInteraction" -> {
+     "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+      "Effects" -> {
+       "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+        "Droplines" -> {
+         "freeformCursorMode" -> True, 
+          "placement" -> {"x" -> "All", "y" -> "None"}}}}, "DefaultPlotStyle" -> 
+    Automatic},
+  PlotRange->{{-378., 378.}, {-246., 246.}},
+  Prolog->{
+    GrayLevel[0, 0.7], 
+    RectangleBox[
+     Scaled[{0, 0}], 
+     Scaled[{1, 1}], RoundingRadius -> Offset[6]]}]], "Output",
+ CellChangeTimes->{3.875875139229602*^9},
+ CellLabel->"Out[39]=",ExpressionUUID->"120eb1c4-bee8-4f30-9a1e-01aef7ac87d2"]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Tests", "Section",
+ CellChangeTimes->{{3.8692162670341597`*^9, 3.869216270041349*^9}, {
+  3.872259185297863*^9, 
+  3.872259188266129*^9}},ExpressionUUID->"94ba434b-cfd2-4e14-beae-\
+d591a5e28e59"],
+
+Cell[CellGroupData[{
+
+Cell["Create tests", "Subsection",
+ CellChangeTimes->{{3.87225919061761*^9, 
+  3.8722591927859097`*^9}},ExpressionUUID->"f64c8a59-ac8b-4541-924e-\
+8cc5034a34d0"],
+
+Cell[CellGroupData[{
+
+Cell["test writing function", "Subsubsection",
+ CellChangeTimes->{{3.872259387561996*^9, 
+  3.872259390314048*^9}},ExpressionUUID->"b33b6bf8-bd9d-4cc5-8955-\
+616696813da3"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Attributes", "[", "makeTest", "]"}], "=", 
+   RowBox[{"{", "HoldRest", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"makeTest", "[", 
+   RowBox[{"filename_", ",", "input_"}], "]"}], ":=", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"file", "=", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<Tests\>\"", ",", 
+         RowBox[{"StringJoin", "[", 
+          RowBox[{"filename", ",", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"StringEndsQ", "[", 
+              RowBox[{"filename", ",", 
+               RowBox[{"\"\<.mt\>\"", "|", "\"\<.wlt\>\""}]}], "]"}], ",", 
+             "\"\<\>\"", ",", "\"\<.wlt\>\""}], "]"}]}], "]"}]}], "}"}], 
+       "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ResourceFunction", "[", "\"\<WriteUnitTest\>\"", "]"}], "[", 
+     RowBox[{"file", ",", "input"}], "]"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.872259236337559*^9, 3.872259348555538*^9}, {
+  3.912264744804756*^9, 3.9122647504359617`*^9}},
+ CellLabel->"In[9]:=",ExpressionUUID->"ec5e9f44-78d1-45b2-be67-54afa60eb8cb"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["test-writing scratch", "Subsubsection",
+ CellChangeTimes->{{3.87225939519448*^9, 3.8722593958018293`*^9}, {
+  3.872780272305126*^9, 
+  3.872780278737397*^9}},ExpressionUUID->"1f308686-e248-4bdf-b699-\
+e223649f9575"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"makeTest", "[", 
+  RowBox[{"\"\<TestRectanglePacking\>\"", ",", 
+   RowBox[{"Needs", "[", "\"\<JasonB`RectanglePacking`\>\"", "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.875622092418469*^9, 3.875622113833675*^9}, {
+  3.9122605585947943`*^9, 3.9122605823941936`*^9}},
+ CellLabel->"In[51]:=",ExpressionUUID->"0a4efb8a-cdfd-404d-91d0-5d0a1b220499"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Adding test: \"\>", 
+   "\[InvisibleSpace]", "\<\"TestRectanglePacking_20231222-DQJTQI\"\>"}],
+  SequenceForm["Adding test: ", "TestRectanglePacking_20231222-DQJTQI"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.912260586391972*^9},
+ CellLabel->"",ExpressionUUID->"0ae03619-cb0b-4419-9680-8e4c776da833"],
+
+Cell[BoxData["\<\"/Users/jasonb/WolframWorkspaces/LibraryLink_Paclets/\
+RectanglePacking/Tests/TestRectanglePacking.wlt\"\>"], "Print",
+ CellChangeTimes->{3.912260586444811*^9},
+ CellLabel->"",ExpressionUUID->"2d1e55f1-adb0-417c-ad03-2165aed95760"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"makeTest", "[", 
+  RowBox[{"\"\<TestRectanglePackingLibrary\>\"", ",", 
+   RowBox[{
+    RowBox[{"Needs", "[", "\"\<JasonB`RectanglePacking`\>\"", "]"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+    "Needs", "[", "\"\<JasonB`RectanglePacking`RectanglePackingLibrary`\>\"", 
+     "]"}], ";"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.912264173134399*^9, 3.912264180581739*^9}, 
+   3.9122642675953817`*^9},
+ CellLabel->"In[19]:=",ExpressionUUID->"d76b76e5-7fc7-4997-807b-1cd521aee493"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"makeTest", "[", 
+  RowBox[{"\"\<TestRectanglePackingLibrary\>\"", ",", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"mbp", "=", 
+       RowBox[{"MaxRectsBinPack", "[", 
+        RowBox[{"100", ",", "500", ",", "True"}], "]"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"mbp", "[", 
+      RowBox[{"\"\<InsertRectangle\>\"", ",", 
+       RowBox[{"{", 
+        RowBox[{"200", ",", "5"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+    "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.912264173134399*^9, 3.912264180581739*^9}, 
+   3.9122642675953817`*^9, {3.912264316394849*^9, 3.912264352598631*^9}, {
+   3.912264798907323*^9, 3.912264845045717*^9}},
+ CellLabel->"In[31]:=",ExpressionUUID->"82bd1c53-2f45-46ae-a658-9d5c3c93aec3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Adding test: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"TestRectanglePackingLibrary_20231222-TRW6PJ\"\>"}],
+  SequenceForm["Adding test: ", "TestRectanglePackingLibrary_20231222-TRW6PJ"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.912264855999955*^9},
+ CellLabel->"",ExpressionUUID->"dd34d5a0-d9a7-46dd-b3ba-74e1fb6e9111"],
+
+Cell[BoxData["\<\"/Users/jasonb/WolframWorkspaces/LibraryLink_Paclets/\
+RectanglePacking/Tests/TestRectanglePackingLibrary.wlt\"\>"], "Print",
+ CellChangeTimes->{3.912264856005259*^9},
+ CellLabel->"",ExpressionUUID->"b3784cf7-3785-413d-a369-81ffdfacf095"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"makeTest", "[", 
+  RowBox[{"\"\<TestRectanglePackingLibrary\>\"", ",", 
+   RowBox[{"ManagedLibraryExpressionQ", "@", 
+    RowBox[{"ShelfBinPack", "[", 
+     RowBox[{"120", ",", "60", ",", "False"}], "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.912264173134399*^9, 3.912264180581739*^9}, 
+   3.9122642675953817`*^9, {3.912264316394849*^9, 3.912264352598631*^9}, {
+   3.912264798907323*^9, 3.912264845045717*^9}, 3.912872289793459*^9, {
+   3.912872330983214*^9, 3.912872337604171*^9}, {3.912872385149148*^9, 
+   3.912872392852285*^9}},
+ CellLabel->"In[15]:=",ExpressionUUID->"64e01ef9-d451-4b44-b0cf-f0f36d4b7762"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Adding test: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"TestRectanglePackingLibrary_20231229-1JII0O\"\>"}],
+  SequenceForm["Adding test: ", "TestRectanglePackingLibrary_20231229-1JII0O"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9128723952536173`*^9},
+ CellLabel->"",ExpressionUUID->"5d4d204a-5e21-4b3f-a11c-9dbe20b6d2e6"],
+
+Cell[BoxData["\<\"/Users/jasonb/WolframWorkspaces/LibraryLink_Paclets/\
+RectanglePacking/Tests/TestRectanglePackingLibrary.wlt\"\>"], "Print",
+ CellChangeTimes->{3.912872395258391*^9},
+ CellLabel->"",ExpressionUUID->"06d65d7b-1e56-4383-8c6e-ce7a284b13ad"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{
+  3.9128723352665443`*^9},ExpressionUUID->"5203656f-7353-4825-8eb0-\
+0c5b213f35f0"],
+
+Cell[BoxData[
+ RowBox[{"getAllNames", "@", "\"\<MaxRectsBinPack\>\""}]], "Input",
+ CellChangeTimes->{{3.912872307231756*^9, 3.912872311807474*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"cabb1453-32cf-4546-940e-b74641672fb4"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Run tests", "Subsection",
+ CellChangeTimes->{{3.872259195489353*^9, 
+  3.8722591969137697`*^9}},ExpressionUUID->"a5e36e94-b338-4fcb-bcf1-\
+6773f7328012"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Block", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"testdir", "=", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<Tests\>\""}], 
+        "}"}], "]"}]}], ",", "testfiles"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"testfiles", "=", 
+     RowBox[{"FileNames", "[", 
+      RowBox[{
+       RowBox[{"\"\<*.mt\>\"", "|", "\"\<*.wlt\>\""}], ",", "testdir"}], 
+      "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"pacletDir", "=", 
+         RowBox[{"NotebookDirectory", "[", "]"}]}], ",", 
+        RowBox[{"files", "=", "testfiles"}]}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"PacletSymbol", "[", 
+        RowBox[{"\"\<MUnit\>\"", ",", "\"\<TestSuiteReport\>\""}], "]"}], "[", 
+       RowBox[{"files", ",", 
+        RowBox[{"Initialization", ":>", 
+         RowBox[{"CompoundExpression", "[", 
+          RowBox[{"PacletDirectoryLoad", "[", "pacletDir", "]"}], "]"}]}]}], 
+       "]"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.912260626762797*^9, 3.912260661829946*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"1cf7d09a-0568-466f-8753-afd666eabe2d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox["TestReportObject",
+    "SummaryHead"], "[", 
+   DynamicModuleBox[{Typeset`open$$ = False, Typeset`embedState$$ = "Ready"}, 
+    
+    TemplateBox[{
+      PaneSelectorBox[{False -> GridBox[{{
+            PaneBox[
+             ButtonBox[
+              DynamicBox[
+               FEPrivate`FrontEndResource["FEBitmaps", "SummaryBoxOpener"], 
+               ImageSizeCache -> {11., {0., 11.}}], Appearance -> None, 
+              BaseStyle -> {}, ButtonFunction :> (Typeset`open$$ = True), 
+              Evaluator -> Automatic, Method -> "Preemptive"], 
+             Alignment -> {Center, Center}, ImageSize -> 
+             Dynamic[{
+               Automatic, 
+                3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                 Magnification])}]], 
+            GraphicsBox[
+             InsetBox[
+              PaneBox[
+               DynamicBox[
+                FEPrivate`FrontEndResource["MUnitExpressions", "SuccessIcon"],
+                 ImageSizeCache -> {16., {3., 9.}}], Alignment -> Center, 
+               ImageSize -> 
+               Dynamic[{
+                 Automatic, 
+                  3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                   Magnification])}]]], AspectRatio -> 1, Axes -> False, 
+             Background -> GrayLevel[0.93], Frame -> True, FrameStyle -> 
+             Directive[
+               Thickness[Tiny], 
+               GrayLevel[0.55]], FrameTicks -> None, ImageSize -> 
+             Dynamic[{
+               Automatic, 
+                3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                 Magnification])}], PlotRange -> {{0, 1}, {0, 1}}], 
+            GridBox[{{
+               RowBox[{
+                 TagBox["\"Tests count: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["8", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Success rate: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox[
+                  TagBox[
+                   InterpretationBox[
+                    StyleBox["\"100%\"", ShowStringCharacters -> False], 1., 
+                    AutoDelete -> True], PercentForm], "SummaryItem"]}]}}, 
+             AutoDelete -> False, 
+             BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, 
+             GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {
+              "Columns" -> {{2}}, "Rows" -> {{Automatic}}}]}}, AutoDelete -> 
+          False, BaselinePosition -> {1, 1}, 
+          GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Top}}}, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], True -> 
+        GridBox[{{
+            PaneBox[
+             ButtonBox[
+              DynamicBox[
+               FEPrivate`FrontEndResource["FEBitmaps", "SummaryBoxCloser"], 
+               ImageSizeCache -> {11., {0., 11.}}], Appearance -> None, 
+              BaseStyle -> {}, ButtonFunction :> (Typeset`open$$ = False), 
+              Evaluator -> Automatic, Method -> "Preemptive"], 
+             Alignment -> {Center, Center}, ImageSize -> 
+             Dynamic[{
+               Automatic, 
+                3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                 Magnification])}]], 
+            GraphicsBox[
+             InsetBox[
+              PaneBox[
+               DynamicBox[
+                FEPrivate`FrontEndResource["MUnitExpressions", "SuccessIcon"],
+                 ImageSizeCache -> {16., {3., 9.}}], Alignment -> Center, 
+               ImageSize -> 
+               Dynamic[{
+                 Automatic, 
+                  3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                   Magnification])}]]], AspectRatio -> 1, Axes -> False, 
+             Background -> GrayLevel[0.93], Frame -> True, FrameStyle -> 
+             Directive[
+               Thickness[Tiny], 
+               GrayLevel[0.55]], FrameTicks -> None, ImageSize -> 
+             Dynamic[{
+               Automatic, 
+                3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                 Magnification])}], PlotRange -> {{0, 1}, {0, 1}}], 
+            GridBox[{{
+               RowBox[{
+                 TagBox["\"Tests count: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["8", "SummaryItem"]}], ""}, {
+               RowBox[{
+                 TagBox["\"Success rate: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox[
+                  TagBox[
+                   InterpretationBox[
+                    StyleBox["\"100%\"", ShowStringCharacters -> False], 1., 
+                    AutoDelete -> True], PercentForm], "SummaryItem"]}], ""}, {
+               RowBox[{
+                 TagBox["\"Success count: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["8", "SummaryItem"]}], "\[SpanFromLeft]"}, {
+               RowBox[{
+                 TagBox["\"Time elapsed: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox[
+                  
+                  TemplateBox[{
+                   "0.081062`4.156242325496756", "\"s\"", "seconds", 
+                    "\"Seconds\""}, "Quantity"], "SummaryItem"]}], 
+               "\[SpanFromLeft]"}}, AutoDelete -> False, 
+             BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, 
+             GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {
+              "Columns" -> {{2}}, "Rows" -> {{Automatic}}}]}}, AutoDelete -> 
+          False, BaselinePosition -> {1, 1}, 
+          GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Top}}}, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]}, 
+       Dynamic[Typeset`open$$], ImageSize -> Automatic]},
+     "SummaryPanel"],
+    DynamicModuleValues:>{}], "]"}],
+  TestReportObject[<|
+   "Title" -> Automatic, "Aborted" -> False, 
+    "TestResults" -> <|
+     85395500828165176 -> 
+      TestObject[<|
+        "MetaInformation" -> None, "AbsoluteTime" -> 3.9128721462876554`*^9, 
+         "SameTest" -> SameQ, "SameMessages" -> $CellContext`MessageMatchQ, 
+         "MemoryConstraint" -> DirectedInfinity[1], "TimeConstraint" -> 
+         DirectedInfinity[1], "CreationID" -> 
+         "0fd250e0-8be8-4fe2-a6fb-d5278210f41d", "TestID" -> 
+         "TestRectanglePackingLibrary_20231222-DOKLU3", "TestFileName" -> 
+         "/Users/jasonb/WolframWorkspaces/LibraryLink_Paclets/\
+RectanglePacking/Tests/TestRectanglePackingLibrary.wlt", "EvaluationID" -> 
+         "880a9e81-cd0d-4f42-9cb4-2ace7d1af311", "Input" -> 
+         HoldForm[
+          Needs["JasonB`RectanglePacking`"]; 
+           Needs["JasonB`RectanglePacking`RectanglePackingLibrary`"]; Null], 
+         "ExpectedMessages" -> HoldForm[{}], "ActualOutput" -> HoldForm[Null],
+          "ActualMessages" -> {}, "AbsoluteTimeUsed" -> 
+         0.040385`4.756735085049341, "CPUTimeUsed" -> 0.03960499999999989, 
+         "MemoryUsed" -> 339232, "IntermediateTestsTree" -> {}, 
+         "ExpectedOutput" -> HoldForm[Null], "Outcome" -> "Success", 
+         "FailureType" -> None|>], 5958969494230045544 -> 
+      TestObject[<|
+        "MetaInformation" -> None, "AbsoluteTime" -> 3.912872146328773*^9, 
+         "SameTest" -> SameQ, "SameMessages" -> $CellContext`MessageMatchQ, 
+         "MemoryConstraint" -> DirectedInfinity[1], "TimeConstraint" -> 
+         DirectedInfinity[1], "CreationID" -> 
+         "601c43d1-d55c-4bc0-aed3-9d196e53a894", "TestID" -> 
+         "TestRectanglePackingLibrary_20231222-4R7TFM", "TestFileName" -> 
+         "/Users/jasonb/WolframWorkspaces/LibraryLink_Paclets/\
+RectanglePacking/Tests/TestRectanglePackingLibrary.wlt", "EvaluationID" -> 
+         "800f8057-2280-45e5-b13a-a056cc20618d", "Input" -> HoldForm[
+           ManagedLibraryExpressionQ[
+            $CellContext`MaxRectsBinPack[100, 100, False]]], 
+         "ExpectedMessages" -> HoldForm[{}], "ActualOutput" -> HoldForm[True],
+          "ActualMessages" -> {}, "AbsoluteTimeUsed" -> 
+         0.000204`2.4601451652578925, "CPUTimeUsed" -> 
+         0.00020599999999948437`, "MemoryUsed" -> 5496, 
+         "IntermediateTestsTree" -> {}, "ExpectedOutput" -> HoldForm[True], 
+         "Outcome" -> "Success", "FailureType" -> None|>], 
+      7635704283378499424 -> 
+      TestObject[<|
+        "MetaInformation" -> None, "AbsoluteTime" -> 3.9128721463295374`*^9, 
+         "SameTest" -> SameQ, "SameMessages" -> $CellContext`MessageMatchQ, 
+         "MemoryConstraint" -> DirectedInfinity[1], "TimeConstraint" -> 
+         DirectedInfinity[1], "CreationID" -> 
+         "c9aef168-deff-4368-a6c4-6d552c27a94d", "TestID" -> 
+         "TestRectanglePackingLibrary_20231222-OVRHDH", "TestFileName" -> 
+         "/Users/jasonb/WolframWorkspaces/LibraryLink_Paclets/\
+RectanglePacking/Tests/TestRectanglePackingLibrary.wlt", "EvaluationID" -> 
+         "ab5f4840-a44c-4d87-accb-ab9d6d2c1345", "Input" -> HoldForm[
+           
+           Block[{$CellContext`mbp = $CellContext`MaxRectsBinPack[
+              100, 100, False]}, 
+            $CellContext`mbp["InsertRectangle", {5, 5}]]], "ExpectedMessages" -> 
+         HoldForm[{}], "ActualOutput" -> HoldForm[{{0, 0}, {5, 5}}], 
+         "ActualMessages" -> {}, "AbsoluteTimeUsed" -> 
+         0.000227`2.5065408550251163, "CPUTimeUsed" -> 
+         0.00022900000000003473`, "MemoryUsed" -> 5352, 
+         "IntermediateTestsTree" -> {}, "ExpectedOutput" -> 
+         HoldForm[{{0, 0}, {5, 5}}], "Outcome" -> "Success", "FailureType" -> 
+         None|>], 4149023930487968580 -> 
+      TestObject[<|
+        "MetaInformation" -> None, "AbsoluteTime" -> 3.9128721463302913`*^9, 
+         "SameTest" -> SameQ, "SameMessages" -> $CellContext`MessageMatchQ, 
+         "MemoryConstraint" -> DirectedInfinity[1], "TimeConstraint" -> 
+         DirectedInfinity[1], "CreationID" -> 
+         "a1205766-af13-4b7f-9cf8-1f16c8f19ed6", "TestID" -> 
+         "TestRectanglePackingLibrary_20231222-OTFJI9", "TestFileName" -> 
+         "/Users/jasonb/WolframWorkspaces/LibraryLink_Paclets/\
+RectanglePacking/Tests/TestRectanglePackingLibrary.wlt", "EvaluationID" -> 
+         "3cafa7e5-0b8e-4a87-927c-cf3cfbf0f3e1", "Input" -> HoldForm[
+           
+           Block[{$CellContext`mbp = $CellContext`MaxRectsBinPack[
+              100, 100, False]}, 
+            $CellContext`mbp["InsertRectangle", {50, 5}]]], 
+         "ExpectedMessages" -> HoldForm[{}], "ActualOutput" -> 
+         HoldForm[{{0, 0}, {50, 5}}], "ActualMessages" -> {}, 
+         "AbsoluteTimeUsed" -> 0.00009`2.104757507271319, "CPUTimeUsed" -> 
+         0.00009099999999984121, "MemoryUsed" -> 4144, 
+         "IntermediateTestsTree" -> {}, "ExpectedOutput" -> 
+         HoldForm[{{0, 0}, {50, 5}}], "Outcome" -> "Success", "FailureType" -> 
+         None|>], 6479891211311081769 -> 
+      TestObject[<|
+        "MetaInformation" -> None, "AbsoluteTime" -> 3.912872146330902*^9, 
+         "SameTest" -> SameQ, "SameMessages" -> $CellContext`MessageMatchQ, 
+         "MemoryConstraint" -> DirectedInfinity[1], "TimeConstraint" -> 
+         DirectedInfinity[1], "CreationID" -> 
+         "491afd4e-ca3f-4176-a303-f20eec113cf1", "TestID" -> 
+         "TestRectanglePackingLibrary_20231222-630ZBX", "TestFileName" -> 
+         "/Users/jasonb/WolframWorkspaces/LibraryLink_Paclets/\
+RectanglePacking/Tests/TestRectanglePackingLibrary.wlt", "EvaluationID" -> 
+         "37c7f0d8-b75a-45b3-9f3b-4ae08c9ffe8c", "Input" -> HoldForm[
+           
+           Block[{$CellContext`mbp = $CellContext`MaxRectsBinPack[
+              100, 100, False]}, 
+            $CellContext`mbp["InsertRectangle", {150, 5}]]], 
+         "ExpectedMessages" -> HoldForm[{}], "ActualOutput" -> 
+         HoldForm[{{0, 0}, {0, 0}}], "ActualMessages" -> {}, 
+         "AbsoluteTimeUsed" -> 0.000088`2.0949976699821624, "CPUTimeUsed" -> 
+         0.00008900000000044983, "MemoryUsed" -> 3944, 
+         "IntermediateTestsTree" -> {}, "ExpectedOutput" -> 
+         HoldForm[{{0, 0}, {0, 0}}], "Outcome" -> "Success", "FailureType" -> 
+         None|>], 5623688621003045566 -> 
+      TestObject[<|
+        "MetaInformation" -> None, "AbsoluteTime" -> 3.9128721463315063`*^9, 
+         "SameTest" -> SameQ, "SameMessages" -> $CellContext`MessageMatchQ, 
+         "MemoryConstraint" -> DirectedInfinity[1], "TimeConstraint" -> 
+         DirectedInfinity[1], "CreationID" -> 
+         "6eb0b95f-51bf-44e7-a59d-a391aaccf699", "TestID" -> 
+         "TestRectanglePackingLibrary_20231222-PKLSDX", "TestFileName" -> 
+         "/Users/jasonb/WolframWorkspaces/LibraryLink_Paclets/\
+RectanglePacking/Tests/TestRectanglePackingLibrary.wlt", "EvaluationID" -> 
+         "e920550c-98e7-40b9-bbfa-5001c1df047b", "Input" -> HoldForm[
+           
+           Block[{$CellContext`mbp = $CellContext`MaxRectsBinPack[
+              100, 500, False]}, 
+            $CellContext`mbp["InsertRectangle", {200, 5}]]], 
+         "ExpectedMessages" -> HoldForm[{}], "ActualOutput" -> 
+         HoldForm[{{0, 0}, {0, 0}}], "ActualMessages" -> {}, 
+         "AbsoluteTimeUsed" -> 0.000092`2.114302825177549, "CPUTimeUsed" -> 
+         0.00009299999999967667, "MemoryUsed" -> 3944, 
+         "IntermediateTestsTree" -> {}, "ExpectedOutput" -> 
+         HoldForm[{{0, 0}, {0, 0}}], "Outcome" -> "Success", "FailureType" -> 
+         None|>], 6317218136184334179 -> 
+      TestObject[<|
+        "MetaInformation" -> None, "AbsoluteTime" -> 3.91287214633213*^9, 
+         "SameTest" -> SameQ, "SameMessages" -> $CellContext`MessageMatchQ, 
+         "MemoryConstraint" -> DirectedInfinity[1], "TimeConstraint" -> 
+         DirectedInfinity[1], "CreationID" -> 
+         "18323327-28ab-4ae9-a526-6ae71a17165c", "TestID" -> 
+         "TestRectanglePackingLibrary_20231222-TRW6PJ", "TestFileName" -> 
+         "/Users/jasonb/WolframWorkspaces/LibraryLink_Paclets/\
+RectanglePacking/Tests/TestRectanglePackingLibrary.wlt", "EvaluationID" -> 
+         "50ba1296-cf88-422b-82b5-52053f2ab48e", "Input" -> HoldForm[
+           
+           Block[{$CellContext`mbp = $CellContext`MaxRectsBinPack[
+              100, 500, True]}, 
+            $CellContext`mbp["InsertRectangle", {200, 5}]]], 
+         "ExpectedMessages" -> HoldForm[{}], "ActualOutput" -> 
+         HoldForm[{{0, 0}, {5, 200}}], "ActualMessages" -> {}, 
+         "AbsoluteTimeUsed" -> 0.000087`2.0900342504506124, "CPUTimeUsed" -> 
+         0.00008900000000000574, "MemoryUsed" -> 3944, 
+         "IntermediateTestsTree" -> {}, "ExpectedOutput" -> 
+         HoldForm[{{0, 0}, {5, 200}}], "Outcome" -> "Success", "FailureType" -> 
+         None|>], 6285018029964179690 -> 
+      TestObject[<|
+        "MetaInformation" -> None, "AbsoluteTime" -> 3.912872148243367*^9, 
+         "SameTest" -> SameQ, "SameMessages" -> $CellContext`MessageMatchQ, 
+         "MemoryConstraint" -> DirectedInfinity[1], "TimeConstraint" -> 
+         DirectedInfinity[1], "CreationID" -> 
+         "7522edb4-d877-455a-a69c-ef311d7038ec", "TestID" -> 
+         "TestRectanglePacking_20231222-DQJTQI", "TestFileName" -> 
+         "/Users/jasonb/WolframWorkspaces/LibraryLink_Paclets/\
+RectanglePacking/Tests/TestRectanglePacking.wlt", "EvaluationID" -> 
+         "f7dcecaf-56ee-48a3-8b7a-4fe71e059abe", "Input" -> HoldForm[
+           Needs["JasonB`RectanglePacking`"]], "ExpectedMessages" -> 
+         HoldForm[{}], "ActualOutput" -> HoldForm[Null], 
+         "ActualMessages" -> {}, "AbsoluteTimeUsed" -> 
+         0.039889`4.751368146703235, "CPUTimeUsed" -> 0.03976399999999991, 
+         "MemoryUsed" -> 339376, "IntermediateTestsTree" -> {}, 
+         "ExpectedOutput" -> HoldForm[Null], "Outcome" -> "Success", 
+         "FailureType" -> None|>]|>, "FailureResults" -> <||>, 
+    "TestsNotEvaluatedKeys" -> {}, "TestsFailedWrongResultsKeys" -> {}, 
+    "TestsFailedWithMessagesKeys" -> {}, 
+    "TestsSucceededKeys" -> {85395500828165176, 5958969494230045544, 
+     7635704283378499424, 4149023930487968580, 6479891211311081769, 
+     5623688621003045566, 6317218136184334179, 6285018029964179690}|>],
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->False]], "Output",
+ CellChangeTimes->{3.912260673616728*^9, 3.9128721484341717`*^9},
+ CellLabel->"Out[5]=",ExpressionUUID->"dd8d06c7-8041-4ba7-9b85-2aabb10b1eb7"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell["scratch", "Section",
+ CellChangeTimes->{{3.912264210095495*^9, 
+  3.912264212245171*^9}},ExpressionUUID->"95312ea7-74a9-4a70-abc5-\
+63dac278d06b"]
+},
+WindowToolbars->{},
+WindowSize->{900, 747},
+WindowMargins->{{Automatic, 152}, {Automatic, 6}},
+WindowTitle->"RectanglePacking - DeveloperNotebook.nb",
+DockedCells->Cell[
+  BoxData[
+   TemplateBox[{
+     ButtonBox[
+     "\"load RectanglePacking paclet\"", 
+      ButtonFunction :> ($PublisherID; $PublisherID = "JasonB"; 
+       PacletDirectoryLoad[
+         NotebookDirectory[]]; With[{$CellContext`syms = Join[
+            Names[("JasonB`" <> "RectanglePacking") <> "`*"], 
+            Names[("JasonB`" <> "RectanglePacking") <> "`*`*"]]}, 
+         Map[(Unprotect[#]; ClearAll[#]; Null)& , $CellContext`syms]]; 
+       Get[("JasonB`" <> "RectanglePacking") <> "`"]), Appearance -> 
+      Automatic, Evaluator -> Automatic, Method -> "Preemptive"], 
+     ButtonBox[
+     "\"open resource definition notebook\"", ButtonFunction :> NotebookOpen[
+        FileNameJoin[{
+          NotebookDirectory[], "RectanglePacking", "ResourceDefinition.nb"}]],
+       Appearance -> Automatic, Evaluator -> Automatic, Method -> 
+      "Preemptive"], 
+     ActionMenuBox[
+     "\"Reference pages\"", {"\"Reference pages:\"" :> ""}, Appearance -> 
+      "PopupMenu"]}, "RowDefault"]], "DockedCell"],
+TaggingRules-><|"TryRealOnly" -> False|>,
+FrontEndVersion->"14.1 for Mac OS X x86 (64-bit) (December 21, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"74159a56-4476-4218-8c13-b620ed580d10"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[611, 21, 223, 3, 29, "Input",ExpressionUUID->"bae53ea4-1f21-42f0-8fbf-b8d1575c9302"],
+Cell[837, 26, 152, 3, 29, "Input",ExpressionUUID->"f7323754-be0a-42e4-90dd-9e8932520275"],
+Cell[CellGroupData[{
+Cell[1014, 33, 225, 4, 66, "Section",ExpressionUUID->"53436a17-b8c6-499d-a71e-33898b59fa6d"],
+Cell[1242, 39, 174, 2, 29, "Input",ExpressionUUID->"5e5d4057-3cd3-4b1f-bced-31f3f9bec8a9"],
+Cell[1419, 43, 6008, 131, 602, "Input",ExpressionUUID->"b5658f99-cc01-48dc-b56a-a4f9b6d3d29d"],
+Cell[7430, 176, 4361, 91, 377, "Input",ExpressionUUID->"51559767-05e2-41a4-8f28-e9732f7c9e77"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[11828, 272, 161, 3, 52, "Section",ExpressionUUID->"893a2275-08c7-4e7a-91d2-d16b5e2ef2e5"],
+Cell[CellGroupData[{
+Cell[12014, 279, 779, 18, 73, "Input",ExpressionUUID->"44a25a8c-fc20-4757-aa2f-35c8d4eb5bf5"],
+Cell[12796, 299, 3377, 84, 251, "Output",ExpressionUUID->"120eb1c4-bee8-4f30-9a1e-01aef7ac87d2"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[16222, 389, 201, 4, 52, "Section",ExpressionUUID->"94ba434b-cfd2-4e14-beae-d591a5e28e59"],
+Cell[CellGroupData[{
+Cell[16448, 397, 161, 3, 54, "Subsection",ExpressionUUID->"f64c8a59-ac8b-4541-924e-8cc5034a34d0"],
+Cell[CellGroupData[{
+Cell[16634, 404, 172, 3, 45, "Subsubsection",ExpressionUUID->"b33b6bf8-bd9d-4cc5-8955-616696813da3"],
+Cell[16809, 409, 1243, 30, 136, "Input",ExpressionUUID->"ec5e9f44-78d1-45b2-be67-54afa60eb8cb"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18089, 444, 221, 4, 45, "Subsubsection",ExpressionUUID->"1f308686-e248-4bdf-b699-e223649f9575"],
+Cell[CellGroupData[{
+Cell[18335, 452, 376, 7, 30, "Input",ExpressionUUID->"0a4efb8a-cdfd-404d-91d0-5d0a1b220499"],
+Cell[CellGroupData[{
+Cell[18736, 463, 359, 7, 24, "Print",ExpressionUUID->"0ae03619-cb0b-4419-9680-8e4c776da833"],
+Cell[19098, 472, 248, 3, 24, "Print",ExpressionUUID->"2d1e55f1-adb0-417c-ad03-2165aed95760"]
+}, Open  ]]
+}, Open  ]],
+Cell[19373, 479, 513, 11, 52, "Input",ExpressionUUID->"d76b76e5-7fc7-4997-807b-1cd521aee493"],
+Cell[CellGroupData[{
+Cell[19911, 494, 791, 18, 73, "Input",ExpressionUUID->"82bd1c53-2f45-46ae-a658-9d5c3c93aec3"],
+Cell[CellGroupData[{
+Cell[20727, 516, 375, 8, 24, "Print",ExpressionUUID->"dd34d5a0-d9a7-46dd-b3ba-74e1fb6e9111"],
+Cell[21105, 526, 255, 3, 24, "Print",ExpressionUUID->"b3784cf7-3785-413d-a369-81ffdfacf095"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21409, 535, 641, 11, 30, "Input",ExpressionUUID->"64e01ef9-d451-4b44-b0cf-f0f36d4b7762"],
+Cell[CellGroupData[{
+Cell[22075, 550, 377, 8, 24, "Print",ExpressionUUID->"5d4d204a-5e21-4b3f-a11c-9dbe20b6d2e6"],
+Cell[22455, 560, 255, 3, 24, "Print",ExpressionUUID->"06d65d7b-1e56-4383-8c6e-ce7a284b13ad"]
+}, Open  ]]
+}, Open  ]],
+Cell[22737, 567, 130, 3, 30, "Input",ExpressionUUID->"5203656f-7353-4825-8eb0-0c5b213f35f0"],
+Cell[22870, 572, 226, 3, 30, "Input",ExpressionUUID->"cabb1453-32cf-4546-940e-b74641672fb4"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23145, 581, 159, 3, 54, "Subsection",ExpressionUUID->"a5e36e94-b338-4fcb-bcf1-6773f7328012"],
+Cell[CellGroupData[{
+Cell[23329, 588, 1311, 33, 136, "Input",ExpressionUUID->"1cf7d09a-0568-466f-8753-afd666eabe2d"],
+Cell[24643, 623, 16898, 314, 61, "Output",ExpressionUUID->"dd8d06c7-8041-4ba7-9b85-2aabb10b1eb7"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+Cell[41580, 942, 152, 3, 52, "Section",ExpressionUUID->"95312ea7-74a9-4a70-abc5-63dac278d06b"]
+}
+]
+*)
+
