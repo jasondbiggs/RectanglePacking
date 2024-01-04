@@ -11,6 +11,8 @@
 
 #include "ManagedTypes.h"
 
+#define CHECK_NUMBER(n)  \
+	if(n < 1) {LLU::ErrorManager::throwException("InvalidRectangleParameter", n);}
 
 namespace rbp {
 

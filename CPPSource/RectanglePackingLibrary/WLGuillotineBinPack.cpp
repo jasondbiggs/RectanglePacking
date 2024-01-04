@@ -196,6 +196,8 @@ void WLGuillotinePacker::placeRectangle(const LLU::Tensor<mint>&) {
 BEGIN_LIBRARY_FUNCTION(GuillotinePacker) {
 	auto width = mngr.getInteger<int>(arg++);
 	auto height = mngr.getInteger<int>(arg++);
+	CHECK_NUMBER(width)
+	CHECK_NUMBER(height)
 
 	auto merge = mngr.getBoolean(arg++);
 	auto freechoice = mngr.getInteger<rbp::GuillotineBinPack::FreeRectChoiceHeuristic>(arg++);

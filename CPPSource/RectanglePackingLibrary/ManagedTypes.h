@@ -34,6 +34,7 @@ MANAGED_CLASS_LIST
 const std::vector<std::pair<std::string, std::string>> libraryExceptionList = {
 	{"StandardException", "Uncaught exception: `1`"},
 	{"WrongLength", "Expecting a vector of length `2` instead of `1`"},
+	{"InvalidRectangleParameter", "Invalid rectangle parameter `1`."},
 	{"UnsupportedOperation", "Operation `2` is not supported in the `1` method."}
 };
 // clang-format on

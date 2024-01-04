@@ -7,6 +7,7 @@
 #include "ManagedTypes.h"
 
 #include "WLRectanglePacker.h"
+#include "RectanglePackUtilities.h"
 
 namespace LIBRARY_NAMESPACE {
 
@@ -54,6 +55,10 @@ MEMBER_FUNCTION(WLRectanglePacker_InsertRectangles) {
 
 	auto& obj = RectanglePackerStore.getInstance(mngr.getInteger<mint>(arg++));
 	auto inputTensor = mngr.get<LLU::Tensor<mint>>(arg++);
+	auto len = inputTensor.getFlattenedLength();
+	for(auto i = 0; i < len; ++i) {
+		CHECK_NUMBER(inputTensor[i]);
+	}
 	mngr.set(obj.insertRectangles(inputTensor));
 }
 END_LIBRARY_FUNCTION
@@ -69,6 +74,10 @@ END_LIBRARY_FUNCTION
 MEMBER_FUNCTION(WLRectanglePacker_PlaceRectangle) {
 	auto& obj = RectanglePackerStore.getInstance(mngr.getInteger<mint>(arg++));
 	const auto& rectData = mngr.getTensor<mint>(arg++);
+	auto len = rectData.getFlattenedLength();
+	for(auto i = 0; i < len; ++i) {
+		CHECK_NUMBER(rectData[i]);
+	}
 	obj.placeRectangle(rectData);
 }
 END_LIBRARY_FUNCTION
@@ -121,6 +130,16 @@ MEMBER_FUNCTION(WLRectanglePacker_information) {
 
 
 	mngr.set(dsOut);
+}
+END_LIBRARY_FUNCTION
+
+/**
+ * @brief    returns the number of packed rectangles
+ * @return   Integer
+ */
+MEMBER_FUNCTION(WLRectanglePacker_GetPackedRectangleCount) {
+	auto& obj = RectanglePackerStore.getInstance(mngr.getInteger<mint>(arg++));
+	mngr.set((mint) obj.getUsedRectangles().size());
 }
 END_LIBRARY_FUNCTION
 

@@ -106,18 +106,22 @@ LLU::Tensor<mint> WLShelfPacker::getDimensions() {
 }
 rbp::Rect WLShelfPacker::insertRectangle(const LLU::Tensor<mint>& dims) {
 	auto res = m_ptr->Insert(dims.at(0), dims.at(1), m_freeChoice);
-	m_insertedRectangles.emplace_back(res);
+	if(res.width != 0 && res.height != 0) {
+		m_insertedRectangles.emplace_back(res);
+	}
 
 	return res;
 }
 LLU::Tensor<mint> WLShelfPacker::insertRectangles(const LLU::Tensor<mint>& inputTensor) {
 	auto rects = rectSizesFromTensor(inputTensor);
 	std::vector<rbp::Rect> res;
-	res.reserve(rects.size());
+	//res.reserve(rects.size());
 
 	for(auto &rect : rects) {
 		auto inserted = res.emplace_back(m_ptr->Insert(rect.width, rect.height, m_freeChoice));
-		m_insertedRectangles.emplace_back(inserted);
+		if(inserted.width != 0 && inserted.height != 0) {
+			m_insertedRectangles.emplace_back(inserted);
+		}
 	}
 
 	return sortedRectVecToTensor(res, inputTensor, true);
@@ -168,6 +172,8 @@ void WLShelfPacker::placeRectangle(const LLU::Tensor<mint>&) {
 BEGIN_LIBRARY_FUNCTION(ShelfPacker) {
 	auto width = mngr.getInteger<int>(arg++);
 	auto height = mngr.getInteger<int>(arg++);
+	CHECK_NUMBER(width)
+	CHECK_NUMBER(height)
 
 	auto useWaste = mngr.getBoolean(arg++);
 

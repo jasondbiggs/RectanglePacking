@@ -151,6 +151,8 @@ void WLSkylinePacker::placeRectangle(const LLU::Tensor<mint>&) {
 BEGIN_LIBRARY_FUNCTION(SkylinePacker) {
 	auto width = mngr.getInteger<int>(arg++);
 	auto height = mngr.getInteger<int>(arg++);
+	CHECK_NUMBER(width)
+	CHECK_NUMBER(height)
 
 	auto useWaste = mngr.getBoolean(arg++);
 

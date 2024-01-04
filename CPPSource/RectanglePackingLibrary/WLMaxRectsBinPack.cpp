@@ -156,7 +156,8 @@ void WLMaxRectcsPacker::placeRectangle(const LLU::Tensor<mint>& rectData) {
 BEGIN_LIBRARY_FUNCTION(MaxRectsPacker) {
 	auto width = mngr.getInteger<int>(arg++);
 	auto height = mngr.getInteger<int>(arg++);
-
+	CHECK_NUMBER(width)
+	CHECK_NUMBER(height)
 	auto allowFlip = mngr.getBoolean(arg++);
 
 	auto freechoice = mngr.getInteger<rbp::MaxRectsBinPack::FreeRectChoiceHeuristic>(arg++);
