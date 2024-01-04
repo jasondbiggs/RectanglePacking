@@ -3,13 +3,17 @@
 BeginPackage["JasonB`RectanglePacking`"]
 
 
-PackRectangles::usage = "PackRectangles[boundingbox,{rect1,rect2,..}] packs the given rectangles in the given bounding box."
-(*PackingResult::usage = "PackingResult[..] is returned by PackRectangles"*)
+PackRectangles::usage = "PackRectangles[boundingbox,{rect1,rect2,..}] packs the given rectangles in the given bounding box.
+PackRectangles[boundingbox,rectangles,method] uses the given method to pack rectangles."
 
 
-RectanglePacker
+
+RectanglePacker::usage = "RectanglePacker[boundingbox] creates a mutable data structure into which rectangles can be packed.
+RectanglePacker[boundingbox, method] uses the given method to pack rectangles."
 
 $RectanglePackingMethods
+$DefaultRectanglePackingMethod = "MaxRects"
+
 
 Begin["`Private`"]
 
@@ -21,132 +25,11 @@ PackRectangles::nopac = "Failed to pack `1` rectangles."
 Get["JasonB`RectanglePacking`RectanglePackingLibrary`"]
 
 
-$MaxRectFreeChoiceMethods = {"BestShortSideFit", "BestLongSideFit", "BestAreaFit",
-		"BottomLeftRule", "ContactPointRule"}
-		
-$GuillotineFreeChoiceMethods = {"BestAreaFit", "BestShortSideFit", "BestLongSideFit",
-		"WorstAreaFit", "WorstShortSideFit", "WorstLongSideFit"}
-
-$GuillotineSplitMethods = {
-	"ShorterLeftoverAxis", "LongerLeftoverAxis", "MinimizeArea",
-	"MaximizeArea", "ShorterAxis", "LongerAxis"
-}
-		
-
-
-$RectangleMethods = {
-		"MaximalRectangles", 
-		
-		"Guillotine"
-	};
-	
-rpSubOptions["MaximalRectangles"] = <|"FreeChoiceRule" -> "BestAreaFit", "AllowFlip" -> True|>
-	
-rpSubOptions["Guillotine"] = <|"FreeChoiceRule" -> "BestAreaFit", "SplitRule" -> "MaximizeArea", "MergeFreeRectangles" -> True|>
-
-
-rpMethodPick = With[
-	{assoc = AssociationThread[$RectangleMethods -> Range[Length[$RectangleMethods]]]},
-	Lookup[assoc, #]&
-]
-
-subMethodEnumWithMessage[submethod_, value_, valid_ ] := Replace[
-	FirstPosition[valid, value], 
-	{
-		{x_Integer} :> x - 1 (* these library enums start at 0 *),
-		_Missing :> (
-			Message[RectangleBinPack::submtd, value, submethod, valid];
-			Throw[$Failed, "rectanglePackError"];
-		) 
-	}
-]
-
-
 fail[msg_, other___] := Throw[Failure["RectanglePackingFailure", <|"Message" -> msg, other|>], $tag]
 Attributes[catch] = {HoldFirst}
-catch[arg_] := Catch[arg, $tag]
+catch[arg_] := Catch[arg, _]
 
 
-
-
-(* ************************************************************************* **
-
-                        PackRectangles
-
-** ************************************************************************* *)
-(*{"BestShortSideFit", "BestLongSideFit", "BestAreaFit",
-		"BottomLeftRule", "ContactPointRule"}*)
-
-Options[PackRectangles] = {
-	"AllowFlips" -> True,
-	"FreeChoiceHeuristic" -> "BestAreaFit",
-	"FixedRectangles" -> {}
-}
-
-
-$rectanglePattern = _Rectangle | {_Integer,_Integer}
-$specifiedRectanglePattern = Rectangle[{_Integer,_Integer},{_Integer,_Integer}]|{{_Integer,_Integer},{_Integer,_Integer}}
-
-PackRectangles[bb:$rectanglePattern, rects : {$rectanglePattern...}, opts:OptionsPattern[]] := catch @ iPackRectangles[
-	bb, rects, Flatten @ {opts}
-]
-
-
-
-
-rectangleDims[dims:{_Integer, _Integer} ] := dims
-rectangleDims[Rectangle[{_Integer, _Integer} ]  ] := {1,1}
-rectangleDims[(Rectangle|Cuboid)[{xmin_Integer, ymin_Integer}, {xmax_Integer, ymax_Integer}] ] := {
-	Abs[xmax - xmin], Abs[ymax - ymin]
-}
-rectangleDims[input_] := (Message[PackRectangles::notrec, input]; fail["Invalid rectangle encountered.", "InputRectangle" -> input])
-
-translateResults[HoldPattern[Rectangle[{a_, b_}, _]], data_] := translateResults[{a,b}, data]
-
-translateResults[{a_, b_}, data_ /; ArrayQ[data, 3, IntegerQ]] := Apply[
-	Rectangle,
-	TranslationTransform[{a, b}] @ data,
-	{1}
-]
-
-translateResults[___] := $Failed
-
-
-$UnpackedRectangle = ConstantArray[0, {2,2}]; 
-
-iPackRectangles[bb_, rectsIn_, input_, opts:OptionsPattern[]] := Module[
-	{width, height, packer, flips, freeChoice, fixed, failed = False, res, rectDims},
-	rectDims = rectangleDims /@ rectsIn;
-	{width, height} = rectangleDims @ bb;
-	{flips, freeChoice, fixed} = OptionValue[
-		PackRectangles, 
-		{opts}, 
-		{"AllowFlips", "FreeChoiceHeuristic", "FixedRectangles"}
-	];
-	packer = MaxRectsBinPack[width, height, flips];
-	If[!ManagedLibraryExpressionQ[packer], fail["could not construct library object", "BadResult" -> packer]];
-	If[!MatchQ[fixed, {$specifiedRectanglePattern...}], fail["invalid fixed rectangles", "BadResult" -> packer]];
-	
-	
-	
-	res = Replace[
-		packer["InsertRectangles", rectDims, "FreeChoiceHeuristic" -> freeChoice],
-		xx:$UnpackedRectangle :> (failed = True;Echo[xx]; $Failed),
-		{1}
-	];
-	If[failed,
-		Message[PackRectangles::nopac, Count[res, $Failed]];
-		res = Replace[
-			Thread[{res, rectsIn}],
-			{
-				{$Failed, x_} :> Failure["BadRectangle", <|"Input" -> x|>],
-				{x_, _} :> x
-			},
-			{1}
-		]
-	];
-	res
-]    
 
 
 
@@ -189,7 +72,7 @@ defineMethod["SkylineBottomLeft", {"Shelf", "FreeChoiceHeuristic" -> "BottomLeft
 defineMethod["SkylineBestFit", {"Shelf", "FreeChoiceHeuristic" -> "BestFit"}]
 
 
-expandMethod[Automatic] := {"MaxRects"}
+expandMethod[Automatic] := {$DefaultRectanglePackingMethod}
 expandMethod[{s_String, opts___}] := Replace[
 	expandMethod[s],
 	{a_, b___} :> {a, opts, b}
@@ -208,8 +91,6 @@ $Cache := $Cache = PacletSymbol["JasonB/WeakCache", "WeakHashTable"]["RectangleP
 
 $rectanglePattern = _Rectangle | {_Integer,_Integer}
 
-RectanglePacker[r:$rectanglePattern, o:OptionsPattern[]] := RectanglePacker[r, "MaxRects", o]
-
 RectanglePacker[r:$rectanglePattern, method: Automatic|_String|{_String, ___Rule}:Automatic, o:OptionsPattern[]] := catch @ Block[
 	{res},
 	res = iRectanglePacker[rectangleDims @ r, expandMethod @ method, Flatten[{o}]];
@@ -217,22 +98,28 @@ RectanglePacker[r:$rectanglePattern, method: Automatic|_String|{_String, ___Rule
 	If[$Cache["KeyExistsQ", res], res, $Failed]
 ]
 
+RectanglePacker[in:Except[$rectanglePattern | _String], ___] := catch @ (Message[PackRectangles::notrec, in]; fail["Invalid rectangle encountered.", "InputRectangle" -> in])
 
 
-makeRectanglePacker[mle_?ManagedLibraryExpressionQ] := Block[
-	{res},
-	res = RectanglePacker @ CreateUUID[];
-	$Cache["Insert", res, mle];
-	res
-]
+rectangleDims[dims:{_Integer, _Integer} ] := dims
+rectangleDims[Rectangle[{_Integer, _Integer} ]  ] := {1,1}
+rectangleDims[(Rectangle|Cuboid)[{xmin_Integer, ymin_Integer}, {xmax_Integer, ymax_Integer}] ] := {
+	Abs[xmax - xmin], Abs[ymax - ymin]
+}
+rectangleDims[input_] := (Message[PackRectangles::notrec, input]; fail["Invalid rectangle encountered.", "InputRectangle" -> input])
+
+
+
 
 
 
 iRectanglePacker[{w_, h_}, {method_String, methodOpts___Rule}, o_] := Block[
 	{mle, function = Lookup[methodDispatch, method, fail["Unknown method", "BadMethod" -> method]], res},
-	mle = Echo @ function[w, h, Echo @ FilterRules[Echo @ {o, methodOpts}, Options[function]]];
+	mle = function[w, h, FilterRules[{o, methodOpts}, Options[function]]];
 	If[!ManagedLibraryExpressionQ[mle], fail["could not construct library object", "BadResult" -> mle]];
-	makeRectanglePacker @ mle
+	res = RectanglePacker @ CreateUUID[];
+	$Cache["Insert", res, mle];
+	res
 ]
 
 methodDispatch = <|
@@ -272,12 +159,17 @@ rpSubvalue[rp_, p_,{"BoundingRectangle"}] := Rectangle[
 
 rpSubvalue[_, p_,{"PackedRectangleCoordinates"}] := Replace[
 	p["GetUsedRectangles"],
-	Except[{} | (m_ /; ArrayQ[m, 3, IntegerQ])] :> fail["invalid packed rectangles"]
+	Except[_List] :> fail["invalid packed rectangles"]
+]
+
+rpSubvalue[_, p_,{"PackedRectangleCount"}] := Replace[
+	p["GetPackedRectangleCount"],
+	Except[_Integer] :> fail["invalid packed rectangles"]
 ]
 
 rpSubvalue[_, p_,{"FreeRectangleCoordinates"}] := Replace[
 	p["GetUsedRectangles"],
-	Except[{} | (m_ /; ArrayQ[m, 3, IntegerQ])] :> fail["invalid packed rectangles"]
+	Except[_List] :> fail["invalid packed rectangles"]
 ]
 
 rpSubvalue[_, p_,{"PackedRectangles"|"Rectangles"}] := Rectangle @@@ rpSubvalue[_, p, {"PackedRectangleCoordinates"}]
@@ -289,6 +181,22 @@ rpSubvalue[rp_, p_,{"Insert", rect : $rectanglePattern}] := Replace[
 	{e_} :> e
 ]
 
+
+$specifiedRectanglePattern = Rectangle[{_Integer,_Integer},{_Integer,_Integer}]|{{_Integer,_Integer},{_Integer,_Integer}}
+rpSubvalue[_, p_,{"PlaceRectangle", rectIn_}] := Module[
+	{rect},
+	rect = Replace[rectIn,
+		{
+			r:Rectangle[{_Integer,_Integer},{_Integer,_Integer}] :> List @@ r,
+			r:{{_Integer,_Integer},{_Integer,_Integer}} :> r,
+			r_ :> fail["Invalid rectangle encountered.", "InputRectangle" -> r]
+		}
+	];
+	
+	p["PlaceRectangle", rect]
+]
+
+$UnpackedRectangle = ConstantArray[0, {2,2}];
 
 rpSubvalue[_, p_,{"Insert", rectsIn:{$rectanglePattern...}}] := Block[
 	{rectDims, res, opts, failed},
@@ -388,9 +296,42 @@ rpInvalidBox[rp_, fmt_] := With[{failed = BoxForm`SurroundWithAngleBrackets["inv
 ]
 
 
+(* ************************************************************************* **
+
+                        PackRectangles
+
+** ************************************************************************* *)
+
+
+Options[PackRectangles] = {
+	"FixedRectangles" -> {}
+}
+
+
+
+PackRectangles[r_, rectsIn_, method:Automatic|_String|{_String, ___Rule}:Automatic, o:OptionsPattern[]] := catch @ Module[
+	{packer, fixed},
+	packer = RectanglePacker[r, method, o];
+	If[FailureQ[packer], Throw[packer, $tag]];
+	fixed = OptionValue[PackRectangles, FilterRules[{o}, "FixedRectangles"], "FixedRectangles"];
+	addFixed[packer, fixed];
+	
+	packer["Insert", rectsIn]
+]
+
+addFixed[_, {}] := Null
+addFixed[p_, fixed_List] := addFixed[p] /@ fixed
+addFixed[p_, r_Rectangle] := addFixed[p, {r}]
+addFixed[_, l_] := fail["invalid fixed rectangles l"]
+
+addFixed[p_][r_] := Replace[p["PlaceRectangle", r], f_?FailureQ :> Throw[f, $tag]]
+
+
+
 With[
 	{list = $RectanglePackingMethods},
-	FE`Evaluate[FEPrivate`AddSpecialArgCompletion["RectanglePacker" -> {0, list}]]
+	FE`Evaluate[FEPrivate`AddSpecialArgCompletion["RectanglePacker" -> {0, list}]];
+	FE`Evaluate[FEPrivate`AddSpecialArgCompletion["PackRectangles" -> {0, 0, list}]]
 ]
 
 End[] (* End Private Context *)

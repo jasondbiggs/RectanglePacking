@@ -726,6 +726,21 @@ Pattern[expr, _WLRectanglePacker]["information"] := fromDataStore @ Quiet @ catc
 	{"WLRectanglePacker", "information"}
 ]
 
+methodData[WLRectanglePacker, "GetPackedRectangleCount"] = <|
+	"Usage" -> "wlrectanglepacker[\"GetPackedRectangleCount\"] \
+returns the number of packed rectangles
+
+Returns: Integer"
+|>
+
+libfun["WLRectanglePacker_GetPackedRectangleCount"] := libfun["WLRectanglePacker_GetPackedRectangleCount"] = libraryFunctionLoad[
+	$RectanglePackingLibrary, "WLRectanglePacker_GetPackedRectangleCount", {Integer}, Integer
+];
+Pattern[expr, _WLRectanglePacker]["GetPackedRectangleCount"] := Quiet @ catchThrowErrors[
+	libfun["WLRectanglePacker_GetPackedRectangleCount"][getManagedID[WLRectanglePacker][expr]],
+	{"WLRectanglePacker", "GetPackedRectangleCount"}
+]
+
 
 (* ::Subsection::Closed:: *)
 (*WLShelfBinPack*)
