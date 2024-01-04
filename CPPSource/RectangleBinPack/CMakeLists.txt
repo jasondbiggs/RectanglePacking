@@ -19,6 +19,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 		CXX_STANDARD 17
 		CXX_STANDARD_REQUIRED YES
 		CXX_EXTENSIONS NO
+		POSITION_INDEPENDENT_CODE YES
 )
 add_executable(${TEST_PROJECT_NAME} test/MaxRectsBinPackTest.cpp MaxRectsBinPack.cpp Rect.cpp)
 
