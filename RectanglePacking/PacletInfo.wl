@@ -21,10 +21,7 @@ PacletObject @ <|
 				},
 				"Symbols" -> {
 					"JasonB`RectanglePacking`PackRectangles",
-					"JasonB`RectanglePacking`RectanglePacker"(*,
-					"JasonB`RectanglePacking`RectanglePackingLibrary`MaxRectsBinPack",
-					"JasonB`RectanglePacking`RectanglePackingLibrary`MaxRectsBinPack",
-					"JasonB`RectanglePacking`RectanglePackingLibrary`GuillotineBinPack"*)
+					"JasonB`RectanglePacking`RectanglePacker"
 				}
 			},
 			{"Documentation"}

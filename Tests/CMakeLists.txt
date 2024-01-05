@@ -14,7 +14,7 @@ set(WL_RUN_TESTS
 			print[args___] := Print[OutputForm[Row[{args}]]];
 			If[Head[testfile] =!= String, Print["No test file ", testfile];Exit[1]];
 			TestDataDirectory = "${TESTDATA_DIRECTORY}";
-			res = TestReport[testfile, ProgressReporting -> False];
+			res = TestReport[testfile, FilterRules[{ProgressReporting -> False}, Options[TestReport]];
 			If[TrueQ[res["ReportSucceeded"]],
 				print[FileBaseName[testfile],": ",Length[res["ResultsByOutcome"]["Success"]], " tests passed in ", res["AbsoluteTimeUsed"]];
 				Exit[0],

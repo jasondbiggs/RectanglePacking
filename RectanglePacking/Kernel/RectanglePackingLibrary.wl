@@ -3,11 +3,6 @@
 BeginPackage["JasonB`RectanglePacking`RectanglePackingLibrary`"]
 
 
-$RectangleBinPackLinkFailure = "RectanglePackingLibrary"
-
-ThrowRectangleBinPackLinkFailure
-CatchPacletExceptions
-
 (* ::Subsection::Closed:: *)
 (*Symbols list*)
 
